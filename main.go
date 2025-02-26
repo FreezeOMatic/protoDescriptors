@@ -1,8 +1,8 @@
 package main
 
 import (
+	"rpcdescriptors/client"
 	_ "rpcdescriptors/gen"
-	"rpcdescriptors/gen/client"
 	"rpcdescriptors/server"
 )
 
