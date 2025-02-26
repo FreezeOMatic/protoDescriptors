@@ -40,6 +40,19 @@ func GetMessage() []byte {
 	return envdata
 }
 
+func GetEnumMessage() []byte {
+	state := test.PersonsEnumType_UNDEFINED
+
+	message := &test.MessageWithEnum{EnumSignal: state}
+
+	enumData, err := proto.Marshal(message)
+	if err != nil {
+		log.Fatalf("Failed to marshal enum: %v", err)
+	}
+
+	return enumData
+}
+
 func getDescriptorProto(msg protoreflect.ProtoMessage) *descriptorpb.DescriptorProto {
 	fileDesc := msg.ProtoReflect().Descriptor().ParentFile()
 
@@ -50,6 +63,21 @@ func getDescriptorProto(msg protoreflect.ProtoMessage) *descriptorpb.DescriptorP
 	for _, msgDescProto := range fileDescProto.MessageType {
 		if msgDescProto.GetName() == string(msg.ProtoReflect().Descriptor().Name()) {
 			return msgDescProto
+		}
+	}
+
+	return nil
+}
+
+func getEnumDescriptorProto(enum protoreflect.Enum) *descriptorpb.EnumDescriptorProto {
+	fileDesc := enum.Descriptor().ParentFile()
+	println(fileDesc.Name())
+	fileDescProto := protodesc.ToFileDescriptorProto(fileDesc)
+	println(fileDescProto.GetName())
+	for _, enumDescProto := range fileDescProto.EnumType {
+		if enumDescProto.GetName() == string(enum.Descriptor().Name()) {
+			//println(enum.Descriptor().Name())
+			return enumDescProto
 		}
 	}
 

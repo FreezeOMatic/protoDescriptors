@@ -25,11 +25,53 @@ message Envelope {
   google.protobuf.DescriptorProto descriptor = 2;
 }
 
-message PersonEnums {
+extend google.protobuf.EnumValueOptions {
+  optional string abbr = 54321;
+  optional google.protobuf.DescriptorProto descriptor = 54322;
+}
+
+message PersonsEnumType {
   enum SignalType {
-    UNDEFINED = 0;
-    HELL_ONE = 1;
-    HELL_TWO = 2;
+    UNDEFINED = 0 [
+      (abbr)="undefined_topic",
+      (descriptor) = {
+        name: "test.Undefined",
+        field: [
+          { name: "info", number: 1, type: TYPE_STRING }
+        ]
+      }
+    ];
+    HELL_ONE = 1 [
+      (abbr)="hellone_topic",
+      (descriptor) = {
+        name: "test.HellOne",
+        field: [
+          { name: "one", number: 1, type: TYPE_INT32 }
+        ]
+      }
+    ];
+    HELL_TWO = 2 [
+      (abbr)="helltwo_topic",
+      (descriptor) = {
+        name: "test.HellTwo",
+        field: [
+          { name: "two", number: 1, type: TYPE_INT32 }
+        ]
+      }
+    ];
   }
-  google.protobuf.EnumDescriptorProto descriptor = 1;
+}
+
+message MessageWithEnum {
+  PersonsEnumType.SignalType enumSignal = 1;
+}
+
+message Undefined {
+  string info = 1;
+}
+message HellOne {
+  int32 one = 1;
+}
+message HellTwo {
+  int32 two = 1;
 }

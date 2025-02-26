@@ -7,6 +7,9 @@ import (
 )
 
 func main() {
-	msg := server.GetMessage()
-	client.ServeMessage(msg)
+	//msg := server.GetMessage()
+	//client.ServeMessage(msg)
+
+	msg := server.GetEnumMessage()
+	client.ServeEnumMessage(msg)
 }

@@ -22,52 +22,52 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type PersonEnums_SignalType int32
+type PersonsEnumType_SignalType int32
 
 const (
-	PersonEnums_UNDEFINED PersonEnums_SignalType = 0
-	PersonEnums_HELL_ONE  PersonEnums_SignalType = 1
-	PersonEnums_HELL_TWO  PersonEnums_SignalType = 2
+	PersonsEnumType_UNDEFINED PersonsEnumType_SignalType = 0
+	PersonsEnumType_HELL_ONE  PersonsEnumType_SignalType = 1
+	PersonsEnumType_HELL_TWO  PersonsEnumType_SignalType = 2
 )
 
-// Enum value maps for PersonEnums_SignalType.
+// Enum value maps for PersonsEnumType_SignalType.
 var (
-	PersonEnums_SignalType_name = map[int32]string{
+	PersonsEnumType_SignalType_name = map[int32]string{
 		0: "UNDEFINED",
 		1: "HELL_ONE",
 		2: "HELL_TWO",
 	}
-	PersonEnums_SignalType_value = map[string]int32{
+	PersonsEnumType_SignalType_value = map[string]int32{
 		"UNDEFINED": 0,
 		"HELL_ONE":  1,
 		"HELL_TWO":  2,
 	}
 )
 
-func (x PersonEnums_SignalType) Enum() *PersonEnums_SignalType {
-	p := new(PersonEnums_SignalType)
+func (x PersonsEnumType_SignalType) Enum() *PersonsEnumType_SignalType {
+	p := new(PersonsEnumType_SignalType)
 	*p = x
 	return p
 }
 
-func (x PersonEnums_SignalType) String() string {
+func (x PersonsEnumType_SignalType) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (PersonEnums_SignalType) Descriptor() protoreflect.EnumDescriptor {
+func (PersonsEnumType_SignalType) Descriptor() protoreflect.EnumDescriptor {
 	return file_proto_test_proto_enumTypes[0].Descriptor()
 }
 
-func (PersonEnums_SignalType) Type() protoreflect.EnumType {
+func (PersonsEnumType_SignalType) Type() protoreflect.EnumType {
 	return &file_proto_test_proto_enumTypes[0]
 }
 
-func (x PersonEnums_SignalType) Number() protoreflect.EnumNumber {
+func (x PersonsEnumType_SignalType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use PersonEnums_SignalType.Descriptor instead.
-func (PersonEnums_SignalType) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use PersonsEnumType_SignalType.Descriptor instead.
+func (PersonsEnumType_SignalType) EnumDescriptor() ([]byte, []int) {
 	return file_proto_test_proto_rawDescGZIP(), []int{3, 0}
 }
 
@@ -227,27 +227,26 @@ func (x *Envelope) GetDescriptor_() *descriptorpb.DescriptorProto {
 	return nil
 }
 
-type PersonEnums struct {
-	state         protoimpl.MessageState            `protogen:"open.v1"`
-	Descriptor_   *descriptorpb.EnumDescriptorProto `protobuf:"bytes,1,opt,name=descriptor,proto3" json:"descriptor,omitempty"`
+type PersonsEnumType struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PersonEnums) Reset() {
-	*x = PersonEnums{}
+func (x *PersonsEnumType) Reset() {
+	*x = PersonsEnumType{}
 	mi := &file_proto_test_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PersonEnums) String() string {
+func (x *PersonsEnumType) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PersonEnums) ProtoMessage() {}
+func (*PersonsEnumType) ProtoMessage() {}
 
-func (x *PersonEnums) ProtoReflect() protoreflect.Message {
+func (x *PersonsEnumType) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_test_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -259,16 +258,185 @@ func (x *PersonEnums) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PersonEnums.ProtoReflect.Descriptor instead.
-func (*PersonEnums) Descriptor() ([]byte, []int) {
+// Deprecated: Use PersonsEnumType.ProtoReflect.Descriptor instead.
+func (*PersonsEnumType) Descriptor() ([]byte, []int) {
 	return file_proto_test_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *PersonEnums) GetDescriptor_() *descriptorpb.EnumDescriptorProto {
+type MessageWithEnum struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	EnumSignal    PersonsEnumType_SignalType `protobuf:"varint,1,opt,name=enumSignal,proto3,enum=test.PersonsEnumType_SignalType" json:"enumSignal,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MessageWithEnum) Reset() {
+	*x = MessageWithEnum{}
+	mi := &file_proto_test_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MessageWithEnum) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MessageWithEnum) ProtoMessage() {}
+
+func (x *MessageWithEnum) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_test_proto_msgTypes[4]
 	if x != nil {
-		return x.Descriptor_
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
 	}
-	return nil
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MessageWithEnum.ProtoReflect.Descriptor instead.
+func (*MessageWithEnum) Descriptor() ([]byte, []int) {
+	return file_proto_test_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *MessageWithEnum) GetEnumSignal() PersonsEnumType_SignalType {
+	if x != nil {
+		return x.EnumSignal
+	}
+	return PersonsEnumType_UNDEFINED
+}
+
+type Undefined struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Info          string                 `protobuf:"bytes,1,opt,name=info,proto3" json:"info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Undefined) Reset() {
+	*x = Undefined{}
+	mi := &file_proto_test_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Undefined) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Undefined) ProtoMessage() {}
+
+func (x *Undefined) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_test_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Undefined.ProtoReflect.Descriptor instead.
+func (*Undefined) Descriptor() ([]byte, []int) {
+	return file_proto_test_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *Undefined) GetInfo() string {
+	if x != nil {
+		return x.Info
+	}
+	return ""
+}
+
+type HellOne struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	One           int32                  `protobuf:"varint,1,opt,name=one,proto3" json:"one,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HellOne) Reset() {
+	*x = HellOne{}
+	mi := &file_proto_test_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HellOne) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HellOne) ProtoMessage() {}
+
+func (x *HellOne) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_test_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HellOne.ProtoReflect.Descriptor instead.
+func (*HellOne) Descriptor() ([]byte, []int) {
+	return file_proto_test_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *HellOne) GetOne() int32 {
+	if x != nil {
+		return x.One
+	}
+	return 0
+}
+
+type HellTwo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Two           int32                  `protobuf:"varint,1,opt,name=two,proto3" json:"two,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HellTwo) Reset() {
+	*x = HellTwo{}
+	mi := &file_proto_test_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HellTwo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HellTwo) ProtoMessage() {}
+
+func (x *HellTwo) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_test_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HellTwo.ProtoReflect.Descriptor instead.
+func (*HellTwo) Descriptor() ([]byte, []int) {
+	return file_proto_test_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *HellTwo) GetTwo() int32 {
+	if x != nil {
+		return x.Two
+	}
+	return 0
 }
 
 var file_proto_test_proto_extTypes = []protoimpl.ExtensionInfo{
@@ -280,12 +448,36 @@ var file_proto_test_proto_extTypes = []protoimpl.ExtensionInfo{
 		Tag:           "bytes,50000,opt,name=my_custom_option",
 		Filename:      "proto/test.proto",
 	},
+	{
+		ExtendedType:  (*descriptorpb.EnumValueOptions)(nil),
+		ExtensionType: (*string)(nil),
+		Field:         54321,
+		Name:          "test.abbr",
+		Tag:           "bytes,54321,opt,name=abbr",
+		Filename:      "proto/test.proto",
+	},
+	{
+		ExtendedType:  (*descriptorpb.EnumValueOptions)(nil),
+		ExtensionType: (*descriptorpb.DescriptorProto)(nil),
+		Field:         54322,
+		Name:          "test.descriptor",
+		Tag:           "bytes,54322,opt,name=descriptor",
+		Filename:      "proto/test.proto",
+	},
 }
 
 // Extension fields to descriptorpb.FieldOptions.
 var (
 	// optional string my_custom_option = 50000;
 	E_MyCustomOption = &file_proto_test_proto_extTypes[0]
+)
+
+// Extension fields to descriptorpb.EnumValueOptions.
+var (
+	// optional string abbr = 54321;
+	E_Abbr = &file_proto_test_proto_extTypes[1]
+	// optional google.protobuf.DescriptorProto descriptor = 54322;
+	E_Descriptor = &file_proto_test_proto_extTypes[2]
 )
 
 var File_proto_test_proto protoreflect.FileDescriptor
@@ -308,21 +500,47 @@ var file_proto_test_proto_rawDesc = string([]byte{
 	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74,
 	0x6f, 0x72, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x52, 0x0a, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70,
-	0x74, 0x6f, 0x72, 0x22, 0x8c, 0x01, 0x0a, 0x0b, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x45, 0x6e,
-	0x75, 0x6d, 0x73, 0x12, 0x44, 0x0a, 0x0a, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x6f,
-	0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x24, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6e, 0x75, 0x6d, 0x44, 0x65,
-	0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x6f, 0x72, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x52, 0x0a, 0x64,
-	0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x6f, 0x72, 0x22, 0x37, 0x0a, 0x0a, 0x53, 0x69, 0x67,
-	0x6e, 0x61, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0d, 0x0a, 0x09, 0x55, 0x4e, 0x44, 0x45, 0x46,
-	0x49, 0x4e, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x48, 0x45, 0x4c, 0x4c, 0x5f, 0x4f,
-	0x4e, 0x45, 0x10, 0x01, 0x12, 0x0c, 0x0a, 0x08, 0x48, 0x45, 0x4c, 0x4c, 0x5f, 0x54, 0x57, 0x4f,
-	0x10, 0x02, 0x3a, 0x49, 0x0a, 0x10, 0x6d, 0x79, 0x5f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x5f,
-	0x6f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1d, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x4f, 0x70,
-	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0xd0, 0x86, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x6d,
-	0x79, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x08, 0x5a,
-	0x06, 0x2e, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x6f, 0x72, 0x22, 0xce, 0x01, 0x0a, 0x0f, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x73, 0x45,
+	0x6e, 0x75, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x22, 0xba, 0x01, 0x0a, 0x0a, 0x53, 0x69, 0x67, 0x6e,
+	0x61, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x12, 0x3c, 0x0a, 0x09, 0x55, 0x4e, 0x44, 0x45, 0x46, 0x49,
+	0x4e, 0x45, 0x44, 0x10, 0x00, 0x1a, 0x2d, 0x8a, 0xc3, 0x1a, 0x09, 0x75, 0x6e, 0x64, 0x65, 0x66,
+	0x69, 0x6e, 0x65, 0x64, 0x92, 0xc3, 0x1a, 0x1c, 0x0a, 0x0e, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x55,
+	0x6e, 0x64, 0x65, 0x66, 0x69, 0x6e, 0x65, 0x64, 0x12, 0x0a, 0x0a, 0x04, 0x69, 0x6e, 0x66, 0x6f,
+	0x18, 0x01, 0x28, 0x09, 0x12, 0x36, 0x0a, 0x08, 0x48, 0x45, 0x4c, 0x4c, 0x5f, 0x4f, 0x4e, 0x45,
+	0x10, 0x01, 0x1a, 0x28, 0x8a, 0xc3, 0x1a, 0x07, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x6e, 0x65, 0x92,
+	0xc3, 0x1a, 0x19, 0x0a, 0x0c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x4f, 0x6e,
+	0x65, 0x12, 0x09, 0x0a, 0x03, 0x6f, 0x6e, 0x65, 0x18, 0x01, 0x28, 0x05, 0x12, 0x36, 0x0a, 0x08,
+	0x48, 0x45, 0x4c, 0x4c, 0x5f, 0x54, 0x57, 0x4f, 0x10, 0x02, 0x1a, 0x28, 0x8a, 0xc3, 0x1a, 0x07,
+	0x68, 0x65, 0x6c, 0x6c, 0x74, 0x77, 0x6f, 0x92, 0xc3, 0x1a, 0x19, 0x0a, 0x0c, 0x74, 0x65, 0x73,
+	0x74, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x54, 0x77, 0x6f, 0x12, 0x09, 0x0a, 0x03, 0x74, 0x77, 0x6f,
+	0x18, 0x01, 0x28, 0x05, 0x22, 0x53, 0x0a, 0x0f, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x57,
+	0x69, 0x74, 0x68, 0x45, 0x6e, 0x75, 0x6d, 0x12, 0x40, 0x0a, 0x0a, 0x65, 0x6e, 0x75, 0x6d, 0x53,
+	0x69, 0x67, 0x6e, 0x61, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x20, 0x2e, 0x74, 0x65,
+	0x73, 0x74, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x73, 0x45, 0x6e, 0x75, 0x6d, 0x54, 0x79,
+	0x70, 0x65, 0x2e, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x52, 0x0a, 0x65,
+	0x6e, 0x75, 0x6d, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x6c, 0x22, 0x1f, 0x0a, 0x09, 0x55, 0x6e, 0x64,
+	0x65, 0x66, 0x69, 0x6e, 0x65, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x22, 0x1b, 0x0a, 0x07, 0x48, 0x65,
+	0x6c, 0x6c, 0x4f, 0x6e, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x6f, 0x6e, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x05, 0x52, 0x03, 0x6f, 0x6e, 0x65, 0x22, 0x1b, 0x0a, 0x07, 0x48, 0x65, 0x6c, 0x6c, 0x54,
+	0x77, 0x6f, 0x12, 0x10, 0x0a, 0x03, 0x74, 0x77, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x03, 0x74, 0x77, 0x6f, 0x3a, 0x49, 0x0a, 0x10, 0x6d, 0x79, 0x5f, 0x63, 0x75, 0x73, 0x74, 0x6f,
+	0x6d, 0x5f, 0x6f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1d, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
+	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x46, 0x69, 0x65, 0x6c, 0x64,
+	0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0xd0, 0x86, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x0e, 0x6d, 0x79, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x3a,
+	0x3a, 0x0a, 0x04, 0x61, 0x62, 0x62, 0x72, 0x12, 0x21, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6e, 0x75, 0x6d, 0x56, 0x61,
+	0x6c, 0x75, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0xb1, 0xa8, 0x03, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x04, 0x61, 0x62, 0x62, 0x72, 0x88, 0x01, 0x01, 0x3a, 0x68, 0x0a, 0x0a, 0x64,
+	0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x6f, 0x72, 0x12, 0x21, 0x2e, 0x67, 0x6f, 0x6f, 0x67,
+	0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6e, 0x75, 0x6d,
+	0x56, 0x61, 0x6c, 0x75, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0xb2, 0xa8, 0x03,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x6f,
+	0x72, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x52, 0x0a, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74,
+	0x6f, 0x72, 0x88, 0x01, 0x01, 0x42, 0x08, 0x5a, 0x06, 0x2e, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 })
 
 var (
@@ -338,26 +556,33 @@ func file_proto_test_proto_rawDescGZIP() []byte {
 }
 
 var file_proto_test_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_proto_test_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_proto_test_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_proto_test_proto_goTypes = []any{
-	(PersonEnums_SignalType)(0),              // 0: test.PersonEnums.SignalType
-	(*Person)(nil),                           // 1: test.Person
-	(*NextPerson)(nil),                       // 2: test.NextPerson
-	(*Envelope)(nil),                         // 3: test.Envelope
-	(*PersonEnums)(nil),                      // 4: test.PersonEnums
-	(*descriptorpb.DescriptorProto)(nil),     // 5: google.protobuf.DescriptorProto
-	(*descriptorpb.EnumDescriptorProto)(nil), // 6: google.protobuf.EnumDescriptorProto
-	(*descriptorpb.FieldOptions)(nil),        // 7: google.protobuf.FieldOptions
+	(PersonsEnumType_SignalType)(0),       // 0: test.PersonsEnumType.SignalType
+	(*Person)(nil),                        // 1: test.Person
+	(*NextPerson)(nil),                    // 2: test.NextPerson
+	(*Envelope)(nil),                      // 3: test.Envelope
+	(*PersonsEnumType)(nil),               // 4: test.PersonsEnumType
+	(*MessageWithEnum)(nil),               // 5: test.MessageWithEnum
+	(*Undefined)(nil),                     // 6: test.Undefined
+	(*HellOne)(nil),                       // 7: test.HellOne
+	(*HellTwo)(nil),                       // 8: test.HellTwo
+	(*descriptorpb.DescriptorProto)(nil),  // 9: google.protobuf.DescriptorProto
+	(*descriptorpb.FieldOptions)(nil),     // 10: google.protobuf.FieldOptions
+	(*descriptorpb.EnumValueOptions)(nil), // 11: google.protobuf.EnumValueOptions
 }
 var file_proto_test_proto_depIdxs = []int32{
-	5, // 0: test.Envelope.descriptor:type_name -> google.protobuf.DescriptorProto
-	6, // 1: test.PersonEnums.descriptor:type_name -> google.protobuf.EnumDescriptorProto
-	7, // 2: test.my_custom_option:extendee -> google.protobuf.FieldOptions
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	2, // [2:3] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9,  // 0: test.Envelope.descriptor:type_name -> google.protobuf.DescriptorProto
+	0,  // 1: test.MessageWithEnum.enumSignal:type_name -> test.PersonsEnumType.SignalType
+	10, // 2: test.my_custom_option:extendee -> google.protobuf.FieldOptions
+	11, // 3: test.abbr:extendee -> google.protobuf.EnumValueOptions
+	11, // 4: test.descriptor:extendee -> google.protobuf.EnumValueOptions
+	9,  // 5: test.descriptor:type_name -> google.protobuf.DescriptorProto
+	6,  // [6:6] is the sub-list for method output_type
+	6,  // [6:6] is the sub-list for method input_type
+	5,  // [5:6] is the sub-list for extension type_name
+	2,  // [2:5] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_proto_test_proto_init() }
@@ -371,8 +596,8 @@ func file_proto_test_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_test_proto_rawDesc), len(file_proto_test_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   4,
-			NumExtensions: 1,
+			NumMessages:   8,
+			NumExtensions: 3,
 			NumServices:   0,
 		},
 		GoTypes:           file_proto_test_proto_goTypes,
