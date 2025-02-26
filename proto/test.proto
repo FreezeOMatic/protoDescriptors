@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package test;
+
+option go_package = "./test";
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FieldOptions {
+  string my_custom_option = 50000;
+}
+
+message Person {
+  string name = 1 [(my_custom_option) = "some metadata"];
+  int32 age = 2;
+}
+
+message NextPerson {
+  string id = 1;
+  int32 order = 2;
+}
+
+message Envelope {
+  bytes data = 1;
+  google.protobuf.DescriptorProto descriptor = 2;
+}
+
+message PersonEnums {
+  enum SignalType {
+    UNDEFINED = 0;
+    HELL_ONE = 1;
+    HELL_TWO = 2;
+  }
+  google.protobuf.EnumDescriptorProto descriptor = 1;
+}
