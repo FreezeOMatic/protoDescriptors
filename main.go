@@ -1,28 +1,47 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
-	"fmt"
 	"rpcdescriptors/excelizer"
 	"rpcdescriptors/gen"
 	_ "rpcdescriptors/gen"
 )
 
 func main() {
-	var headers excelizer.Columns
-	flag.Var(&headers, "col", "Добавьте строку в массив (можно использовать несколько раз)")
+
+	cols := excelizer.NewColumns()
+
+	flag.Var(&cols.Flags, "col", "Добавьте строку в массив (можно использовать несколько раз)")
 	flag.Parse()
 
-	excel := excelizer.NewXLSX(headers)
-	convertor := gen.New(excel)
-	err := convertor.OpenDescriptor("gen/descriptor.pb")
+	cols.MapValuesToColumnsFromFlags()
+	cols.MapInternalNamesToFlagNames()
+
+	excel := excelizer.NewXLSX(*cols)
+	err := excel.CreateXLSX()
+	if err != nil {
+		panic(err)
+	}
+	err = excel.CreateSheet("vitrine_test")
 	if err != nil {
 		panic(err)
 	}
 
-	m := convertor.CollectEnumValues()
+	convertor := gen.New(excel)
+	err = convertor.OpenDescriptor("gen/descriptor.pb")
+	if err != nil {
+		panic(err)
+	}
 
-	v, _ := json.MarshalIndent(m, "", " ")
-	fmt.Println(string(v))
+	enums := convertor.CollectEnumValues()
+
+	err = excel.WriteValuesMap("vitrine_test", enums)
+	if err != nil {
+		panic(err)
+	}
+
+	err = excel.Save("test.xlsx")
+	if err != nil {
+		panic(err)
+	}
 }
