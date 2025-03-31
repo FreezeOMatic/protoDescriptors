@@ -6,72 +6,35 @@ option go_package = "./test";
 
 import "google/protobuf/descriptor.proto";
 
-extend google.protobuf.FieldOptions {
-  string my_custom_option = 50000;
-}
-
-message Person {
-  string name = 1 [(my_custom_option) = "some metadata"];
-  int32 age = 2;
-}
-
-message NextPerson {
-  string id = 1;
-  int32 order = 2;
-}
-
-message Envelope {
-  bytes data = 1;
-  google.protobuf.DescriptorProto descriptor = 2;
-}
-
 extend google.protobuf.EnumValueOptions {
-  optional string abbr = 54321;
-  optional google.protobuf.DescriptorProto descriptor = 54322;
+  string description = 5000;
+  string parent_message = 5001;
 }
 
-message PersonsEnumType {
-  enum SignalType {
-    UNDEFINED = 0 [
-      (abbr)="undefined_topic",
-      (descriptor) = {
-        name: "test.Undefined",
-        field: [
-          { name: "info", number: 1, type: TYPE_STRING }
-        ]
-      }
-    ];
-    HELL_ONE = 1 [
-      (abbr)="hellone_topic",
-      (descriptor) = {
-        name: "test.HellOne",
-        field: [
-          { name: "one", number: 1, type: TYPE_INT32 }
-        ]
-      }
-    ];
-    HELL_TWO = 2 [
-      (abbr)="helltwo_topic",
-      (descriptor) = {
-        name: "test.HellTwo",
-        field: [
-          { name: "two", number: 1, type: TYPE_INT32 }
-        ]
-      }
-    ];
-  }
+enum Signals {
+  SignalUnspecified = 0;
+  SignalLat = 701 [
+    (parent_message) = "SomeGeo.latitude"
+  ];
+  SignalLong = 702 [
+    (parent_message) = "SomeGeo.longitude"
+  ];
+  SignalDiff = 805;
 }
 
-message MessageWithEnum {
-  PersonsEnumType.SignalType enumSignal = 1;
+message SomeGeo {
+  optional float latitude = 1;
+  optional float longitude = 2;
+  optional float altitude = 3;
+  optional float some = 4;
 }
 
-message Undefined {
-  string info = 1;
+message SomeGeoPacked {
+  float latitude = 1;
+  float longitude = 2;
 }
-message HellOne {
-  int32 one = 1;
-}
-message HellTwo {
-  int32 two = 1;
+
+message PackedBundle {
+  bytes value = 1;
+  google.protobuf.DescriptorProto descriptor = 2;
 }
