@@ -1,6 +1,8 @@
 package server
 
 import (
+	"fmt"
+	"google.golang.org/protobuf/reflect/protoreflect"
 	"rpcdescriptors/client"
 	"rpcdescriptors/gen/test"
 	"testing"
@@ -36,5 +38,10 @@ func Test_PackGeo(t *testing.T) {
 
 		t.Logf("Received message name: %v", receivedMessage.Descriptor().FullName())
 		t.Logf("Received message: %v", receivedMessage)
+
+		receivedMessage.Range(func(fd protoreflect.FieldDescriptor, v protoreflect.Value) bool {
+			fmt.Printf("%s: %v\n", fd.Name(), v)
+			return true
+		})
 	}
 }
