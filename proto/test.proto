@@ -7,18 +7,13 @@ option go_package = "./test";
 import "google/protobuf/descriptor.proto";
 
 extend google.protobuf.EnumValueOptions {
-  string description = 5000;
   string parent_message = 5001;
 }
 
 enum Signals {
   SignalUnspecified = 0;
-  SignalLat = 701 [
-    (parent_message) = "SomeGeo.latitude"
-  ];
-  SignalLong = 702 [
-    (parent_message) = "SomeGeo.longitude"
-  ];
+  SignalLat = 701 [(parent_message) = "SomeGeo.latitude"];
+  SignalLong = 702 [(parent_message) = "SomeGeo.longitude"];
   SignalDiff = 805;
 }
 
@@ -36,5 +31,5 @@ message SomeGeoPacked {
 
 message PackedBundle {
   bytes value = 1;
-  google.protobuf.DescriptorProto descriptor = 2;
+  google.protobuf.FileDescriptorSet descriptor = 2;
 }

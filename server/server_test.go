@@ -36,8 +36,8 @@ func Test_PackGeo(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		t.Logf("Received message name: %v", receivedMessage.Descriptor().FullName())
 		t.Logf("Received message: %v", receivedMessage)
+		t.Logf("Received message name: %v", receivedMessage.Descriptor().FullName())
 
 		receivedMessage.Range(func(fd protoreflect.FieldDescriptor, v protoreflect.Value) bool {
 			fmt.Printf("%s: %v\n", fd.Name(), v)

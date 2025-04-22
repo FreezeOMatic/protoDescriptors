@@ -22,6 +22,16 @@ func NewLocalRegistry() (*LocalRegistry, error) {
 		files: reg,
 	}, nil
 }
+func createLocalRegistry() (*protoregistry.Files, error) {
+	fileDesc := &descriptorpb.FileDescriptorProto{
+		Name:        proto.String("dynamic_cache.proto"),
+		Syntax:      proto.String("proto3"),
+		MessageType: []*descriptorpb.DescriptorProto{},
+	}
+	fds := descriptorpb.FileDescriptorSet{File: []*descriptorpb.FileDescriptorProto{fileDesc}}
+
+	return protodesc.NewFiles(&fds)
+}
 
 func (reg *LocalRegistry) CreateDescriptorForSignalPack(name string, signals []LocalSignal) *descriptorpb.DescriptorProto {
 	desc := &descriptorpb.DescriptorProto{
@@ -40,20 +50,8 @@ func (reg *LocalRegistry) CreateDescriptorForSignalPack(name string, signals []L
 	return desc
 }
 
-func createLocalRegistry() (*protoregistry.Files, error) {
-	fileDesc := &descriptorpb.FileDescriptorProto{
-		Name:        proto.String("dynamic_cache.proto"),
-		Syntax:      proto.String("proto3"),
-		MessageType: []*descriptorpb.DescriptorProto{},
-	}
-	fds := descriptorpb.FileDescriptorSet{File: []*descriptorpb.FileDescriptorProto{fileDesc}}
-
-	return protodesc.NewFiles(&fds)
-}
-
 func (reg *LocalRegistry) RegisterDescriptor(desc *descriptorpb.DescriptorProto) (protoreflect.MessageDescriptor, error) {
 	fmt.Printf("RegisterDescriptor: %v\n", desc.GetName())
-
 	fileDesc := &descriptorpb.FileDescriptorProto{
 		Name:   proto.String(fmt.Sprintf("dynamic_%s.proto", desc.GetName())),
 		Syntax: proto.String("proto3"),
@@ -61,18 +59,15 @@ func (reg *LocalRegistry) RegisterDescriptor(desc *descriptorpb.DescriptorProto)
 			desc,
 		},
 	}
-
-	// 2. Конвертируем в FileDescriptor
+	// Конвертируем в FileDescriptor
 	fd, err := protodesc.NewFile(fileDesc, reg.files)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create file descriptor: %w", err)
 	}
-
-	// 3. Получаем дескриптор сообщения
+	// Получаем дескриптор сообщения
 	msgDesc := fd.Messages().ByName(protoreflect.Name(desc.GetName()))
 	if msgDesc == nil {
 		return nil, fmt.Errorf("message descriptor not found")
 	}
-
 	return msgDesc, nil
 }

@@ -22,17 +22,16 @@ func init() {
 
 type LocalSignals map[string][]LocalSignal
 type LocalSignal struct {
-	ID                  int32   `json:"id"`
-	Name                string  `json:"name"`
-	Value               float32 `json:"value"`
-	NewMessageFieldName string  `json:"newMessageFieldName"`
+	ID                  int32  `json:"id"`
+	Name                string `json:"name"`
+	Value               any    `json:"value"`
+	NewMessageFieldName string `json:"newMessageFieldName"`
 }
 
 func (l LocalSignals) AddByKey(key string, signal LocalSignal) {
 	if _, ok := l[key]; !ok {
 		l[key] = make([]LocalSignal, 0)
 	}
-
 	l[key] = append(l[key], signal)
 }
 
@@ -70,16 +69,14 @@ func ReadReceivedPackage(receivedPackSignals []test.Signals, receivedPackData []
 		fmt.Printf("LocalSignalMapperParentName: %v\n", k)
 		// Создаем дескриптор сообщения
 		desc := reg.CreateDescriptorForSignalPack(k, signals)
-
+		// регистрируем дескриптор в localRegistry
 		messageDescriptor, err := reg.RegisterDescriptor(desc)
 		if err != nil {
 			return nil, err
 		}
-
 		// создаём dynamic сообщение
 		msg := dynamicpb.NewMessage(messageDescriptor)
-
-		// 3. Заполняем значениями
+		// заполняем значениями новое сообщение
 		for _, signal := range signals {
 			fd := messageDescriptor.Fields().ByName(protoreflect.Name(signal.NewMessageFieldName))
 			if fd == nil {
@@ -87,9 +84,7 @@ func ReadReceivedPackage(receivedPackSignals []test.Signals, receivedPackData []
 			}
 			msg.Set(fd, detectValueType(signal.Value))
 		}
-
 		fmt.Printf("Final Message %s: %v\n", msg.Descriptor().Name(), msg)
-
 		messages = append(messages, msg)
 	}
 

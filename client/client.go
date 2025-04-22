@@ -16,7 +16,6 @@ func ReceiveAndParse(data []byte) (*dynamicpb.Message, error) {
 	if err := proto.Unmarshal(data, &bundle); err != nil {
 		return nil, err
 	}
-
 	descriptorName := bundle.GetDescriptor_().Name
 	fmt.Println("desc Name", *descriptorName)
 
@@ -28,18 +27,14 @@ func ReceiveAndParse(data []byte) (*dynamicpb.Message, error) {
 			bundle.GetDescriptor_(),
 		},
 	}
-
 	// 3. Регистрируем тип
 	fd, err := protodesc.NewFile(fileDesc, nil)
 	if err != nil {
 		return nil, err
 	}
-
 	fmt.Println("descriptor: ", fd.Messages().Get(0).FullName())
-
 	// 4. Находим дескриптор
 	desc := fd.Messages().ByName(protoreflect.Name(*descriptorName))
-
 	// 5. Создаем и парсим сообщение
 	msg := dynamicpb.NewMessage(desc)
 	if err := proto.Unmarshal(bundle.GetValue(), msg); err != nil {
@@ -47,5 +42,4 @@ func ReceiveAndParse(data []byte) (*dynamicpb.Message, error) {
 	}
 
 	return msg, nil
-
 }
